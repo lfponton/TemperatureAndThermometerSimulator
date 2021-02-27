@@ -4,6 +4,9 @@ import core.ViewHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Region;
+import mediator.TemperatureModel;
+import model.Temperature;
 
 public class TemperatureViewController
 {
@@ -14,11 +17,15 @@ public class TemperatureViewController
   private String thermometerId;
   private ViewHandler viewHandler;
   private TemperatureViewModel temperatureViewModel;
+  private Region root;
 
   public void init(ViewHandler viewHandler,
       TemperatureViewModel temperatureViewModel) {
     this.viewHandler = viewHandler;
     this.temperatureViewModel = temperatureViewModel;
+
+    this.temperatureViewModel.getLastTemp();
+    outputLabel.textProperty().bind(temperatureViewModel.getIdProperty());
   }
 
   @FXML private void onUpdateButton() {

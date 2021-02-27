@@ -15,7 +15,15 @@ public class TemperatureViewModel
   }
 
   public void getLastTemp() {
-
+    if (temperatureModel.getLastInsertedTemperature() != null)
+    {
+      temperature.setValue(temperatureModel.getLastInsertedTemperature()
+          .getValue());
+      id.setValue(temperatureModel.getLastInsertedTemperature().getId());
+    }
   }
+
+  public DoubleProperty getTemperatureProperty() { return temperature; }
+  public StringProperty getIdProperty() { return id; }
 
 }
