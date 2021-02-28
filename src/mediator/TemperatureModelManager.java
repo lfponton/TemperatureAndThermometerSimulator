@@ -12,7 +12,8 @@ public class TemperatureModelManager implements TemperatureModel, Subject
   private TemperatureList temperatureList;
   private PropertyChangeSupport propertyChangeSupport;
 
-  public TemperatureModelManager() {
+  public TemperatureModelManager()
+  {
     temperatureList = new TemperatureList();
     propertyChangeSupport = new PropertyChangeSupport(this);
   }
@@ -22,7 +23,8 @@ public class TemperatureModelManager implements TemperatureModel, Subject
     Temperature t = new Temperature(id, temperature);
     Temperature old = getLastInsertedTemperature();
     this.temperatureList.addTemperature(t);
-    propertyChangeSupport.firePropertyChange("Update", old, t);
+    propertyChangeSupport
+        .firePropertyChange("Update", old, t.toString());
   }
 
   @Override public Temperature getLastInsertedTemperature()

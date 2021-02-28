@@ -24,9 +24,7 @@ public class TemperatureViewController
   {
     this.viewHandler = viewHandler;
     this.temperatureViewModel = temperatureViewModel;
-
-    this.temperatureViewModel.getLastTemp();
-
+    
     outputLabel.textProperty().bind(temperatureViewModel.getTemperatureProperty());
 
   }

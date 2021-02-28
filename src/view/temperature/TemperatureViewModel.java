@@ -1,11 +1,15 @@
 package view.temperature;
 
-import javafx.beans.property.DoubleProperty;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import mediator.TemperatureModel;
+import util.Subject;
 
-public class TemperatureViewModel
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+public class TemperatureViewModel implements PropertyChangeListener
 {
   private StringProperty temperature;
   private StringProperty id;
@@ -14,20 +18,16 @@ public class TemperatureViewModel
   public TemperatureViewModel(TemperatureModel temperatureModel) {
     this.temperatureModel = temperatureModel;
     this.temperature = new SimpleStringProperty();
-  }
-
-  public void getLastTemp() {
-    if (temperatureModel.getLastInsertedTemperature() != null)
-    {
-      String output = temperatureModel.getLastInsertedTemperature().toString();
-      temperature.setValue(output);
-    }
-    else
-    {
-      temperature.setValue("No data");
-    }
+    ((Subject) temperatureModel).addListener((PropertyChangeEvent evt) -> this.propertyChange(evt));
   }
 
   public StringProperty getTemperatureProperty() { return temperature; }
 
+  @Override public void propertyChange(PropertyChangeEvent evt)
+  {
+    Platform.runLater(() -> {
+      String output = temperatureModel.getLastInsertedTemperature().toString();
+      temperature.setValue(output);
+    });
+  }
 }
