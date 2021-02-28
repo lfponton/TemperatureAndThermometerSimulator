@@ -1,7 +1,6 @@
 package external;
 
 import mediator.TemperatureModel;
-import model.Temperature;
 
 public class Thermometer implements Runnable
 {

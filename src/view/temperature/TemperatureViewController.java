@@ -20,19 +20,24 @@ public class TemperatureViewController
   private Region root;
 
   public void init(ViewHandler viewHandler,
-      TemperatureViewModel temperatureViewModel) {
+      TemperatureViewModel temperatureViewModel)
+  {
     this.viewHandler = viewHandler;
     this.temperatureViewModel = temperatureViewModel;
 
     this.temperatureViewModel.getLastTemp();
-    outputLabel.textProperty().bind(temperatureViewModel.getIdProperty());
-  }
 
-  @FXML private void onUpdateButton() {
+    outputLabel.textProperty().bind(temperatureViewModel.getTemperatureProperty());
 
   }
 
-  @FXML private void onFilter() {
+  @FXML private void onUpdateButton()
+  {
+
+  }
+
+  @FXML private void onFilter()
+  {
 
   }
 }

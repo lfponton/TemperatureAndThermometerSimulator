@@ -33,6 +33,7 @@ public class ViewHandler
     currentStage = new Stage();
     currentScene = new Scene(root);
     currentStage.setTitle("Temperature Simulator");
+    currentStage.setScene(currentScene);
     currentStage.show();
   }
 }

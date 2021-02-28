@@ -1,29 +1,33 @@
 package view.temperature;
 
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import mediator.TemperatureModel;
 
 public class TemperatureViewModel
 {
-  private DoubleProperty temperature;
+  private StringProperty temperature;
   private StringProperty id;
   private TemperatureModel temperatureModel;
 
   public TemperatureViewModel(TemperatureModel temperatureModel) {
     this.temperatureModel = temperatureModel;
+    this.temperature = new SimpleStringProperty();
   }
 
   public void getLastTemp() {
     if (temperatureModel.getLastInsertedTemperature() != null)
     {
-      temperature.setValue(temperatureModel.getLastInsertedTemperature()
-          .getValue());
-      id.setValue(temperatureModel.getLastInsertedTemperature().getId());
+      String output = temperatureModel.getLastInsertedTemperature().toString();
+      temperature.setValue(output);
+    }
+    else
+    {
+      temperature.setValue("No data");
     }
   }
 
-  public DoubleProperty getTemperatureProperty() { return temperature; }
-  public StringProperty getIdProperty() { return id; }
+  public StringProperty getTemperatureProperty() { return temperature; }
 
 }
